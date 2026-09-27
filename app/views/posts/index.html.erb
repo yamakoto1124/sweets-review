@@ -1,0 +1,14 @@
+<h2>レビュー一覧</h2>
+
+<div>
+  <% @posts.each do |post| %>
+    <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+      <!-- 各投稿の詳細ページへのリンクを設置（要件4） -->
+      <h3><%= link_to post.title, post_path(post) %></h3>
+      
+      <!-- 投稿者名や本文の一部 -->
+      <p>投稿者: <%= post.user.last_name %> <%= post.user.first_name %></p>
+      <p><%= truncate(post.body, length: 50) %></p>
+    </div>
+  <% end %>
+</div>

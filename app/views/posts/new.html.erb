@@ -1,0 +1,36 @@
+<h2>レビュー新規投稿</h2>
+
+<% if @post.errors.any? %>
+  <div style="color: red;">
+    <h3><%= @post.errors.count %>件のエラーが発生しました:</h3>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @post do |f| %>
+  <!-- ジャンル選択欄（ジャンルモデル実装後は f.collection_select 等に差し替え） -->
+  <div>
+    <%= f.label :genre_id, "ジャンルID（仮）" %>
+    <%= f.number_field :genre_id, value: 1, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :body, "レビュー本文" %>
+    <%= f.text_area :body, rows: 6, required: true %>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <%= f.submit "投稿する" %>
+  </div>
+<% end %>
+
+<p style="margin-top: 20px;"><%= link_to "トップに戻る", root_path %></p>

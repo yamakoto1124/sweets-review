@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "posts/new"
+  get "posts/index"
+  get "posts/show"
   resources :users, only: [:new, :create] , path: 'users', path_names: { new: 'sign_up' }
   resource :session
   resources :passwords, param: :token
@@ -17,5 +20,6 @@ Rails.application.routes.draw do
   
   root "homes#top"
   get "about" => "homes#about", as: :about
+  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
 end

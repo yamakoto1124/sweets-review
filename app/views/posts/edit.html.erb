@@ -1,0 +1,33 @@
+<h2>投稿の編集</h2>
+
+<!-- エラーメッセージ表示（要件7・8） -->
+<% if @post.errors.any? %>
+  <div style="color: red;">
+    <h3><%= @post.errors.count %>件のエラーが発生しました:</h3>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<!-- 編集用フォーム（要件6: form_with model: @post と書くだけで元のデータが自動で入る） -->
+<%= form_with model: @post do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :body, "レビュー本文" %>
+    <%= f.text_area :body, rows: 6, required: true %>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <!-- 更新ボタン（要件6） -->
+    <%= f.submit "更新する" %>
+  </div>
+<% end %>
+
+<p style="margin-top: 20px;"><%= link_to "詳細に戻る", post_path(@post) %></p>

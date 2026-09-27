@@ -1,0 +1,18 @@
+<h2><%= @post.title %></h2>
+
+<p>投稿者: <%= @post.user.last_name %> <%= @post.user.first_name %></p>
+<p>投稿日時: <%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+
+<div style="margin: 20px 0; padding: 15px; background: #f9f9f9;">
+  <%= simple_format(@post.body) %>
+</div>
+
+<!-- ログインしており、かつ「投稿の作成者」と「現在ログイン中のユーザー」が一致する場合のみ表示 -->
+<% if authenticated? && @post.user == Current.user %>
+  <div style="display: flex; gap: 10px; margin: 15px 0;">
+    <%= link_to "編集する", edit_post_path(@post), class: "btn" %>
+    <%= button_to "削除する", post_path(@post), method: :delete, data: { turbo_confirm: "本当に削除しますか？" } %>
+  </div>
+<% end %>
+
+<p style="margin-top: 20px;"><%= link_to "一覧に戻る", posts_path %></p>

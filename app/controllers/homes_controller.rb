@@ -3,6 +3,7 @@ class HomesController < ApplicationController
   allow_unauthenticated_access only: [:top, :about]
 
   def top
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def about

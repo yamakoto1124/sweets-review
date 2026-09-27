@@ -1,1 +1,42 @@
 <h1>ここはスイーツのレビューサイトです</h1>
+
+<!-- ログインしている場合は投稿画面へ、未ログインの場合はログイン画面へ -->
+<div style="margin: 20px 0;">
+  <% if authenticated? %>
+    <%= link_to "＋ レビューを投稿する", new_post_path, style: "padding: 10px 15px; background: #ff9900; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;" %>
+  <% else %>
+    <%= link_to "ログインしてレビューを投稿する", new_session_path, style: "padding: 10px 15px; background: #666; color: white; text-decoration: none; border-radius: 4px;" %>
+  <% end %>
+</div>
+
+<h2>新着レビュー一覧</h2>
+
+<% if @posts.any? %>
+  <div style="display: flex; flex-direction: column; gap: 15px;">
+    <% @posts.each do |post| %>
+      <div style="border: 1px solid #ddd; padding: 15px; border-radius: 6px; background-color: #fafafa;">
+        <!-- タイトルをクリックすると詳細画面へ飛ぶ -->
+        <h3 style="margin-top: 0;">
+          <%= link_to post.title, post_path(post), style: "color: #333; text-decoration: underline;" %>
+        </h3>
+
+        <!-- 投稿者名と投稿日時 -->
+        <p style="font-size: 0.9em; color: #666;">
+          投稿者: <%= post.user.last_name %> <%= post.user.first_name %> ｜ 
+          投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
+        </p>
+
+        <!-- 本文の冒頭50文字を表示 -->
+        <p style="color: #444;">
+          <%= truncate(post.body, length: 50) %>
+        </p>
+
+        <div>
+          <%= link_to "続きを読む", post_path(post), style: "font-size: 0.9em; color: #0066cc;" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだ投稿されたレビューはありません。</p>
+<% end %>
