@@ -34,16 +34,16 @@
     <ul class="header-nav">
       <!-- 共通リンク -->
       <li><%= link_to "about", about_path %></li>
-      <li><%= link_to "新着レビュー", reviews_path %></li> <!-- パス名はルート設定に合わせる -->
-      <li><%= link_to "閲覧数ランキング", rankings_path %></li> <!-- パス名はルート設定に合わせる -->
+      <li><%= link_to "新着レビュー", "#" %></li> <!-- パス名はルート設定に合わせる -->
+      <li><%= link_to "閲覧数ランキング", "#" %></li> <!-- パス名はルート設定に合わせる -->
 
       <% if authenticated? %>
         <!-- ■ ログイン時に表示するリンク -->
-        <li><%= link_to "マイページ", mypage_path %></li> <!-- または user_path(Current.user) -->
+        <li><%= link_to "マイページ", "#" %></li> <!-- または user_path(Current.user) -->
         <li><%= button_to "ログアウト", session_path, method: :delete %></li>
       <% else %>
         <!-- ■ 未ログイン時に表示するリンク -->
-        <li><%= link_to "新規登録", new_registration_path %></li> <!-- 登録機能の実装先に合わせる -->
+        <li><%= link_to "新規登録", new_user_path %></li> <!-- 登録機能の実装先に合わせる -->
         <li><%= link_to "ログイン", new_session_path %></li>
       <% end %>
     </ul>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get "users/new"
-  get "users/create"
+  resources :users, only: [:new, :create] , path: 'users', path_names: { new: 'sign_up' }
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -16,6 +15,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   
-  get 'top' => 'homes#top'
+  root "homes#top"
+  get "about" => "homes#about", as: :about
 
 end

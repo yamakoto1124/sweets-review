@@ -1,2 +1,57 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<h2>新規会員登録</h2>
+
+<% if @user.errors.any? %>
+  <div style="color: red;">
+    <h3><%= @user.errors.count %>件のエラーが発生しました:</h3>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @user, url: users_path do |f| %>
+  <div>
+    <%= f.label :last_name, "姓" %>
+    <%= f.text_field :last_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :first_name, "名" %>
+    <%= f.text_field :first_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :last_name_kana, "セイ（カナ）" %>
+    <%= f.text_field :last_name_kana, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :first_name_kana, "メイ（カナ）" %>
+    <%= f.text_field :first_name_kana, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :email_address, "メールアドレス" %>
+    <%= f.email_field :email_address, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "パスワード（確認用）" %>
+    <%= f.password_field :password_confirmation, required: true %>
+  </div>
+
+  <div>
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to "既にアカウントをお持ちの方はこちら（ログイン）", new_session_path %>
+</p>
