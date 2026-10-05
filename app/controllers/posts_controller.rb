@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post), notice: "投稿を更新しました！"
     else
-      render :edit, status: :unprocessable_entity # 失敗時はedit画面を再描画（要件7・8）
+      render :edit, status: :unprocessable_entity 
     end
   end
 
