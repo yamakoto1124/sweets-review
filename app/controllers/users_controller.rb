@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     
    def show
      @user = User.find(params[:id]) #@User = Current.user? URLに含まれるidをもとに対象のレコードを一件取得User.find...データベースに既に存在する登録済みデータを取り出す
-     @reviews =@user.reviews            #１ユーザに複数のレビューがあるかもだから@reviewsていう箱に１ユーザの複数のレビューが入っている？　ユーザが投稿したレビュー一覧を取得
+     @post =@user.posts           #１ユーザに複数のレビューがあるかもだから@postsていう箱に１ユーザの複数のレビューが入っている？　ユーザが投稿したレビュー一覧を取得
    end
     
    def update
@@ -42,8 +42,6 @@ class UsersController < ApplicationController
      redirect_to new_user_path, notice: "退会手続きが完了しました。"  #destoroyはelseで書かないのが一般的　消すだけだから
 
    end
-
-  end
  
   private
  

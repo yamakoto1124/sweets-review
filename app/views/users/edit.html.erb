@@ -1,0 +1,27 @@
+<%= form_with model: @user do |f| %>   # フォームのことf
+
+  <div>
+    <%= f.label :last_name, "姓" %>
+    <%= f.text_field :last_name %>
+  </div>
+   <div>
+    <%= f.label :first_name, "名" %>
+    <%= f.text_field :first_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :last_name_kana, "セイ（カナ）" %>
+    <%= f.text_field :last_name_kana, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :first_name_kana, "メイ（カナ）" %>
+    <%= f.text_field :first_name_kana, required: true %>
+  </div>
+  <div>
+    <%= f.label :email_address, "メールアドレス" %>
+    <%= f.email_field :email_address %>
+  </div>
+
+<%= f.submit "保存"  %>  # ボタンsubmit
+<% end %>

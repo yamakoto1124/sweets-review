@@ -1,0 +1,31 @@
+
+
+  <h1>マイページ</h1>       
+
+  <h2>ユーザ情報</h2>
+
+<p>名前: <%= @user.last_name %> <%= @user.first_name %></p>
+
+<p>フリガナ: <%= @user.last_name_kana %> <%= @user.first_name_kana %></p>
+
+<p>メールアドレス: <%= @user.email_address %></p>
+
+  <h2>メニューボタン(編集・退会)</h2>
+
+  <%= link_to "編集する",edit_user_path(@user) %>
+  <%= link_to "退会する",user_path(@user), data: { trubo_method: :delete, trubo_confirm: "退会しますか？" }%>
+
+  <h2>投稿一覧</h2>
+<% if @posts.present? %>     #presentは存在する @postに1件でも存在したら ?はですか ①
+  <% @post.each do |post| %>   #post一覧を表示する each連続処理
+  <div>
+  <p><%= post.title %></p>
+  <p><%= post.body %></p>
+
+  <%= link_to "詳細を見る", post_path(post) %>
+  </div>
+  <hr>  #水平線の仕切り線
+<% end %> #①
+<% else %> #②
+<p>投稿はありません。</p>
+<% end %> #②

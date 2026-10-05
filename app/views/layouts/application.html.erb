@@ -39,7 +39,7 @@
 
       <% if authenticated? %>
         <!-- ■ ログイン時に表示するリンク -->
-        <li><%= link_to "マイページ", "#" %></li> <!-- または user_path(Current.user) -->
+        <li><%= link_to "マイページ", user_path(Current.user) %></li> 
         <li><%= button_to "ログアウト", session_path, method: :delete %></li>
       <% else %>
         <!-- ■ 未ログイン時に表示するリンク -->

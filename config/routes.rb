@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  get "posts/new"
-  get "posts/index"
-  get "posts/show"
-  resources :users, only: [:new, :create] , path: 'users', path_names: { new: 'sign_up' }
+  
+  
+  resources :users, only: [:new, :create, :show, :edit, :update, :destroy] , path: 'users', path_names: { new: 'sign_up' }
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
