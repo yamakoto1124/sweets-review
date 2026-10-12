@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_05_055729) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_12_073447) do
   create_table "genres", force: :cascade do |t|
     t.string "genre_name"
     t.datetime "created_at", null: false
@@ -18,7 +18,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_05_055729) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id"
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "body", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_05_055729) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id"
     t.string "ip_address"
     t.string "user_agent"
     t.datetime "created_at", null: false
