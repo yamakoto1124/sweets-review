@@ -34,7 +34,7 @@
     <ul class="header-nav">
       <!-- 共通リンク -->
       <li><%= link_to "about", about_path %></li>
-      <li><%= link_to "新着レビュー", "#" %></li> <!-- パス名はルート設定に合わせる -->
+      <li><%= link_to "新着レビュー",root_path  %></li> <!-- パス名はルート設定に合わせる -->
       <li><%= link_to "閲覧数ランキング", "#" %></li> <!-- パス名はルート設定に合わせる -->
 
       <% if authenticated? %>
