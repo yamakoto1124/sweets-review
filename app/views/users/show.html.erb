@@ -8,24 +8,29 @@
 
 <p>フリガナ: <%= @user.last_name_kana %> <%= @user.first_name_kana %></p>
 
-<p>メールアドレス: <%= @user.email_address %></p>
+<% if authenticated? && Current.user == @user %>
+  <div style="margin: 15px 0; padding: 15px; border: 1px solid #ddd; background-color: #f9f9f9;">
+    <p><strong>メールアドレス:</strong> <%= @user.email_address %></p>
 
-  <h2>メニューボタン(編集・退会)</h2>
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+      <%= link_to "プロフィールを編集する", edit_user_path(@user), style: "padding: 8px 12px; background: #0066cc; color: white; text-decoration: none; border-radius: 4px;" %>
 
-  <%= link_to "編集する",edit_user_path(@user) %>
-  <%= link_to "退会する",user_path(@user), data: { trubo_method: :delete, trubo_confirm: "退会しますか？" }%>
+      <%= button_to "退会する", user_path(@user), method: :delete, data: { turbo_confirm: "本当に退会しますか？投稿データもすべて削除されます。" }, style: "padding: 8px 12px; background: #cc0000; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+    </div>
+  </div>
+  <%  end %>
 
   <h2>投稿一覧</h2>
-<% if @posts.present? %>     #presentは存在する @postに1件でも存在したら ?はですか ①
-  <% @post.each do |post| %>   #post一覧を表示する each連続処理
+<% if @posts.present? %>     
+  <% @posts.each do |post| %>   
   <div>
   <p><%= post.title %></p>
   <p><%= post.body %></p>
 
   <%= link_to "詳細を見る", post_path(post) %>
   </div>
-  <hr>  #水平線の仕切り線
-<% end %> #①
-<% else %> #②
+  <hr>  
+<% end %> 
+<% else %> 
 <p>投稿はありません。</p>
-<% end %> #②
+<% end %> 

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create] #未ログインでも見れるように許可
+  allow_unauthenticated_access only: [:new, :create, :show] #未ログインでも見れるように許可
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
  
   def new
     @user = User.new
@@ -22,8 +23,9 @@ class UsersController < ApplicationController
    end
     
    def show
+    resume_session
      @user = User.find(params[:id]) #@User = Current.user? URLに含まれるidをもとに対象のレコードを一件取得User.find...データベースに既に存在する登録済みデータを取り出す
-     @post =@user.posts           #１ユーザに複数のレビューがあるかもだから@postsていう箱に１ユーザの複数のレビューが入っている？　ユーザが投稿したレビュー一覧を取得
+     @posts =@user.posts           #１ユーザに複数のレビューがあるかもだから@postsていう箱に１ユーザの複数のレビューが入っている？　ユーザが投稿したレビュー一覧を取得
    end
     
    def update
@@ -45,6 +47,13 @@ class UsersController < ApplicationController
    end
  
   private
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == Current.user
+      redirect_to user_path, alert: "権限がありません。"
+    end
+  end
  
   def user_params
     params.require(:user).permit(

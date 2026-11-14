@@ -22,7 +22,7 @@
 
         <!-- 投稿者名と投稿日時 -->
         <p style="font-size: 0.9em; color: #666;">
-          投稿者: <%= post.user.last_name %> <%= post.user.first_name %> ｜ 
+          投稿者: <%= link_to "#{post.user.last_name} #{post.user.first_name}", user_path(post.user), style: "color: #0066cc; text-decoration: underline;" %> |
           投稿日: <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
         </p>
 

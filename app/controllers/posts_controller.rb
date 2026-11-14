@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   # 一覧や詳細は未ログインでも閲覧可にする場合
-  allow_unauthenticated_access only: [:index, :show]
+  allow_unauthenticated_access only: [:index]
 
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path, notice: "投稿を削除しました。"
+    redirect_to user_path, notice: "投稿を削除しました。", status: :see_other
   end
 
   private
