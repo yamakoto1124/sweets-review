@@ -6,3 +6,17 @@ class Post < ApplicationRecord
   validates :body, presence: true #タイトルとボディを入れてね
 
 end
+
+def self.looks(search, word)
+    if search == "perfect_match"
+      Post.where("title LIKE ?", "#{word}")
+    elseif search == "forward_match"
+      Post.where("title LIKE ?", "#{word}%")
+    elseif search == "backward_match"
+      Post.where("title LIKE ?", "%#{word}")
+    elseif search == "partial_match"
+      Post.where("title LIKE ?", "%#{word}%")
+    else
+      Post.all
+    end
+end
