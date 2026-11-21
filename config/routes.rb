@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "searches/search"
+  get "search" => "searches#search"
   
   
   resources :users, only: [:new, :create, :show, :edit, :update, :destroy] , path: 'users', path_names: { new: 'sign_up' }
