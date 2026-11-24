@@ -5,7 +5,7 @@ class SearchesController < ApplicationController
     @search = params[:search] #seacrh query
 
     if @range == "User"
-      @@users = User.looks(@search, @word) #if the search target is a user
+       @users = User.looks(@search, @word) #if the search target is a user
     else
       @posts = Post.looks(@search, @word) #if the search target is a post
     end

@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true #タイトルとボディを入れてね
 
-end
+  has_many :post_comments, dependent: :destroy
 
 def self.looks(search, word)
     if search == "perfect_match"
@@ -19,4 +19,5 @@ def self.looks(search, word)
     else
       Post.all
     end
+  end
 end

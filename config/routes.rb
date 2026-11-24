@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   
   root "homes#top"
   get "about" => "homes#about", as: :about
-  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :posts , only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resources :post_comments, only: [:create, :destroy]
+  end
 
 end
