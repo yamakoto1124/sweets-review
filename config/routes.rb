@@ -24,4 +24,14 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
+  namespace :admin do
+    get "users/index"
+    get "users/show"
+  get "sign_in" => "sessions#new", as: :new_session
+    post "sign_in" => "sessions#create", as: :session
+    delete "sign_out" => "sessions#destroy", as: :destroy_session
+    resources :users, only: [:index, :show, :update]
+  end
+
+
 end
