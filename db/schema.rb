@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_11_24_050620) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_25_040201) do
+  create_table "admin_sessions", force: :cascade do |t|
+    t.integer "admin_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_admin_sessions_on_admin_id"
+  end
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email_address"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "genres", force: :cascade do |t|
     t.string "genre_name"
     t.datetime "created_at", null: false
@@ -58,6 +74,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_24_050620) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "admin_sessions", "admins"
   add_foreign_key "posts", "users"
   add_foreign_key "sessions", "users"
 end

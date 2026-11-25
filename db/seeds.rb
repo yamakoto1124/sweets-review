@@ -45,3 +45,8 @@ Post.find_or_create_by!(title: "季節のいちごショートケーキ") do |po
   post.user = user2
   post.genre = Genre.find_by(genre_name: "ケーキ")
 end
+
+Admin.find_or_create_by!(email_address: "admin@example.com") do |admin|
+  admin.password = "password"
+  admin.password_confirmation = "password"
+end

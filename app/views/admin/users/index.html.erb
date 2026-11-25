@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>会員一覧（管理者画面）</h2>
+    <%= button_to "管理者ログアウト", admin_destroy_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% end %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td>
+            <%= link_to "#{user.last_name} #{user.first_name}", admin_user_path(user) %>
+          </td>
+          <td><%= user.email_address %></td>
+          <td>
+            <% if user.is_deleted %>
+              <span class="text-secondary fw-bold">退会</span>
+            <% else %>
+              <span class="text-success fw-bold">有効</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
